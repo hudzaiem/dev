@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: forecasting-cronjob
+spec:
+  schedule: "0 7 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: forecasting
+            image: gcr.io/[PROJECT-ID]/forecasting:[BUILD-NUMBER]
+            imagePullPolicy: Always
+          restartPolicy: OnFailure
