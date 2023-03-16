@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: forecasting-cronjob
+  name: scheduling-scrape
 spec:
   schedule: "0 7 * * *"
   jobTemplate:
@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-          - name: forecasting
-            image: gcr.io/[PROJECT-ID]/forecasting:[BUILD-NUMBER]
-            imagePullPolicy: Always
+          - name: scraping-hargapangan
+            image: gcr.io/price-forecasting-try/scraping-hargapangan:$BUILD_NUMBER
+            command: ["python", "main.py"]
           restartPolicy: OnFailure
