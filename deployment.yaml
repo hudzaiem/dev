@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hargapangan-scraping
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hargapangan-scraping
+  template:
+    metadata:
+      labels:
+        app: hargapangan-scraping
+    spec:
+      containers:
+      - name: hargapangan-scraping
+        image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
+        command: ["python", "main.py"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hargapangan-scraping-service
+spec:
+  selector:
+    app: hargapangan-scraping
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hargapangan-scraping-cronjob
+spec:
+  schedule: "0 7 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hargapangan-scraping
+            image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
+            imagePullPolicy: Always
+          restartPolicy: OnFailure
