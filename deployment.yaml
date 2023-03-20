@@ -18,7 +18,7 @@ spec:
         command: ["python", "main.py"]
 
 ---
-apiVersion: v1
+apiVersion: serving.knative.dev/v1s
 kind: Service
 metadata:
   name: hargapangan-scraping-service
