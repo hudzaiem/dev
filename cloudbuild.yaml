@@ -4,7 +4,7 @@ steps:
   args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA', '.']
 
 - id  : Test
-  name: 'gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA'
+  name: 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA'
   entrypoint : python
   args: ['test.py']
 
@@ -27,7 +27,7 @@ steps:
   - 'deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast2-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=cd-jenkins'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=jenkins-cd'
 
 - id  : Deploy-to-GKE
   name: 'gcr.io/cloud-builders/gcloud'
@@ -39,7 +39,7 @@ steps:
   - '--image'
   - 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA'
   - '--region'
-  - 'asia-southeast2'
+  - 'asia-southeast2-a'
   - '--platform'
   - 'managed'
   - '--allow-unauthenticated'
