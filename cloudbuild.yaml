@@ -32,7 +32,7 @@ steps:
 - id  : Deploy-to-GKE
   name: 'gcr.io/cloud-builders/gcloud'
   args:
-  - 'run'
+  - 'beta'
   - 'deploy'
   - 'hargapangan-scraping'
   - '--image'
