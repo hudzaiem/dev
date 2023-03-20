@@ -18,19 +18,18 @@ spec:
         command: ["python", "main.py"]
 
 ---
-apiVersion: serving.knative.dev/v1s
+apiVersion: v1
 kind: Service
 metadata:
   name: hargapangan-scraping-service
 spec:
-  template:
-    metadata:
-      name: hargapangan-scraping
-    spec:
-      containers:
-      - image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
-        ports:
-        - containerPort: 8080
+  selector:
+    app: hargapangan-scraping
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
 
 ---
 apiVersion: batch/v1

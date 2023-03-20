@@ -8,4 +8,8 @@ COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
 
+EXPOSE 8080
+ENV PORT 8080
+ENV HOST 0.0.0.0
+
 CMD ["python3" , "main.py"]
