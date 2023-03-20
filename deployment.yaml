@@ -18,21 +18,7 @@ spec:
         command: ["python", "main.py"]
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: hargapangan-scraping-service
-spec:
-  selector:
-    app: hargapangan-scraping
-  type: ClusterIP
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-
----
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: hargapangan-scraping-cronjob
