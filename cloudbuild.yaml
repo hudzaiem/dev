@@ -39,7 +39,7 @@ steps:
   - '--image'
   - 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA'
   - '--region'
-  - 'asia-southeast2-a'
+  - 'asia-southeast2'
   - '--platform'
   - 'managed'
   - '--allow-unauthenticated'
