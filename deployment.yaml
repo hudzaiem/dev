@@ -23,14 +23,14 @@ kind: Service
 metadata:
   name: hargapangan-scraping-service
 spec:
-  selector:
-    app: hargapangan-scraping
-  type: ClusterIP
-  ports:
-    - name: http
-      port: 
+  template:
+    metadata:
+      name: hargapangan-scraping
+    spec:
+      containers:
+      - image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
+        ports:
         - containerPort: 8080
-      targetPort: 8080
 
 ---
 apiVersion: batch/v1
