@@ -30,16 +30,9 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=jenkins-cd'
 
 - id  : Deploy-to-GKE
-  name: 'gcr.io/cloud-builders/gcloud'
+  name: 'gcr.io/cloud-builders/gke-deploy'
   args:
-  - 'beta'
-  - 'run'
-  - 'deploy'
-  - 'hargapangan-scraping'
-  - '--image'
-  - 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA'
-  - '--region'
-  - 'asia-southeast2'
-  - '--platform'
-  - 'managed'
-  - '--allow-unauthenticated'
+  - run
+  - --filename=deployment.yaml
+  - --cluster=jenkins-cd
+  - --location=asia-southeast2-a
