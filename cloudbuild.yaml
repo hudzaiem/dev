@@ -1,7 +1,7 @@
 steps:
 - id  : Build-Docker
   name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA', '.']
+  args: ['build', '--platform' ,'linux/amd64','-t', 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA', '.']
 
 - id  : Test
   name: 'asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA'
