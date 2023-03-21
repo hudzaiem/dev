@@ -15,7 +15,6 @@ spec:
       containers:
       - name: hargapangan-scraping
         image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
-        command: ["python", "main.py"]
 
 ---
 apiVersion: v1
@@ -46,4 +45,5 @@ spec:
           - name: hargapangan-scraping
             image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
             imagePullPolicy: Always
+            command: ["python", "main.py"]
           restartPolicy: OnFailure
