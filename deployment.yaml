@@ -46,4 +46,5 @@ spec:
           - name: hargapangan-scraping
             image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
             imagePullPolicy: Always
+          restartPolicy: OnFailure
 
