@@ -19,7 +19,7 @@ steps:
     - 'PROJECT_ID=$PROJECT_ID'
   args: ['deployment.yaml']
 
-- id  : Apply-configuration
+- id  : Deploy-to-GKE
   name: 'gcr.io/cloud-builders/kubectl'
   args:
   - 'apply'
@@ -28,11 +28,3 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast2-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=jenkins-cd'
-
-- id  : Deploy-to-GKE
-  name: 'gcr.io/cloud-builders/gke-deploy'
-  args:
-  - run
-  - --filename=deployment.yaml
-  - --cluster=jenkins-cd
-  - --location=asia-southeast2-a
