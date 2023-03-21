@@ -7,6 +7,8 @@ from datetime import datetime
 from utilities import util
 import os
 from google.cloud import bigquery
+import warnings
+warnings.filterwarnings('ignore')
 
 
 
