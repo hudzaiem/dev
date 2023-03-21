@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hargapangan-scraping
 spec:
-  replicas: 0
+  replicas: 3
   selector:
     matchLabels:
       app: hargapangan-scraping
@@ -15,6 +15,7 @@ spec:
       containers:
       - name: hargapangan-scraping
         image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
+        command: ["python", "main.py","&&","exit"]
 
 ---
 apiVersion: v1
@@ -45,5 +46,22 @@ spec:
           - name: hargapangan-scraping
             image: asia.gcr.io/$PROJECT_ID/hargapangan-scraping:$SHORT_SHA
             imagePullPolicy: Always
-            command: ["python", "main.py"]
           restartPolicy: OnFailure
+
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hargapangan-scraping-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hargapangan-scraping
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 80
