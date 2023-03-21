@@ -37,7 +37,7 @@ kind: CronJob
 metadata:
   name: hargapangan-scraping-cronjob
 spec:
-  schedule: "0 7 * * * Asia/Jakarta"
+  schedule: "0 7 * * *"
   jobTemplate:
     spec:
       template:
